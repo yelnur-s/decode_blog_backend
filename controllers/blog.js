@@ -38,7 +38,7 @@ const methods = {
             blog.title = title
             blog.description = description
             blog.shortDescription = shortDescription
-            blog.blogType = blogType._id
+            blog.blogType = blogType
             await blog.save()
             return blog
         }
