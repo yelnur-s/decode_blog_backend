@@ -52,7 +52,7 @@ const methods = {
         date: -1,
     }).exec(),
 
-    getBlogsByUserId: async (userId) => await Blog.find({userId}).sort({
+    getBlogsByUserId: async (userId) => await Blog.find({user: userId}).sort({
         date: -1,
     }).limit(6).exec(),
 
