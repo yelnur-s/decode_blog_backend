@@ -38,8 +38,7 @@ router.get('/byId', asyncMiddleware(async  function (req, res) {
 }));
 
 router.get('/', asyncMiddleware(async (req, res, next) => {
-    const { page, active, key } = req.params
-    const blogs = await fetch.blog.getBlogs(page, key)
+    const blogs = await fetch.blog.getBlogs()
     res.status(200).send(blogs)
 }))
 

@@ -3,14 +3,14 @@ const multer = require('multer')
 const Blog = require('../models/Blog')
 
 const methods = {
-    getAllBlogs: async (page, key) => {
+    getAllBlogs: async () => {
         const blog = await Blog.find().sort({
             views: -1,
         }).limit(3).exec()
         return blog
     },
-    getBlogs: async (page, key) => {
-        const blog = await Blog.find().exec()
+    getBlogs: async () => {
+        const blog = await Blog.find().populate('user').populate('blogType').exec()
         return blog
     },
     addBlog: async (data) => {
