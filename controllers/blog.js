@@ -56,9 +56,7 @@ const methods = {
         date: -1,
     }).populate('user').populate('blogType').exec(),
 
-    getBlogsById: async (id) => await Blog.find({
-        ...id ? { _id: id } : {},
-    }).exec(),
+    getBlogsById: async (id) => await Blog.findById(id).exec(),
 
     deleteBlog: async (id) => {
         const blog = await Blog.findById(id).exec()
