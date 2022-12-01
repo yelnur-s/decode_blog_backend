@@ -50,7 +50,7 @@ const methods = {
         ...categoryId ? { blogType: categoryId } : {},
     }).sort({
         date: -1,
-    }).exec(),
+    }).populate('user').populate('blogType').exec(),
 
     getBlogsByUserId: async (userId) => await Blog.find({user: userId}).sort({
         date: -1,
