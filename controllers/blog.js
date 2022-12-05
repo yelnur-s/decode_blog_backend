@@ -12,10 +12,11 @@ const methods = {
     getBlogs: async (key) => {
         let blog = null;
         if(key) {
-            blog = await Blog.find().populate('user').populate('blogType').exec()
-        } else {
             blog = await Blog.find({$or: [{ title: new RegExp(key, 'i') },
             { description: new RegExp(key, 'i') }]}).populate('user').populate('blogType').exec()
+           
+        } else {
+            blog = await Blog.find().populate('user').populate('blogType').exec()
         }
        
         return blog
