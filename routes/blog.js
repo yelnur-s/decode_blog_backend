@@ -49,7 +49,7 @@ router.post('/', passport.authenticate("jwt", {session: false}), asyncMiddleware
         const result = await fetch.blog.addBlog({...req.body, userId: req.user._id})
         console.log(result);
 
-        res.status(200).send({result})
+        res.status(200).send(result)
     } else {
         res.status(400).send(errors)
     }
