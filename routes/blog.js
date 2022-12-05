@@ -42,7 +42,7 @@ router.get('/', asyncMiddleware(async (req, res, next) => {
     res.status(200).send(blogs)
 }))
 
-router.post('/',asyncMiddleware(async (req, res, next) => {
+router.post('/', passport.authenticate("jwt", {session: false}), asyncMiddleware(async (req, res, next) => {
     const {isValid, errors} = validateBlogInput(req.body)
     if(isValid) {
         const result = await fetch.blog.addBlog({...req.body, userId: req.user._id})
@@ -54,7 +54,7 @@ router.post('/',asyncMiddleware(async (req, res, next) => {
     }
 }))
 
-router.put('/', asyncMiddleware(async (req, res, next) => {
+router.put('/', passport.authenticate("jwt", {session: false}), asyncMiddleware(async (req, res, next) => {
     const {isValid, errors} = validateBlogInput(req.body)
     if(isValid) {
 
@@ -66,12 +66,12 @@ router.put('/', asyncMiddleware(async (req, res, next) => {
 
 }))
 
-router.delete('/:id', asyncMiddleware(async (req, res, next) => {
+router.delete('/:id', passport.authenticate("jwt", {session: false}), asyncMiddleware(async (req, res, next) => {
     await fetch.blog.deleteBlog(req.params.id)
     res.status(200).end()
 }))
 
-router.put('/:id/image', upload.single('img'), asyncMiddleware(async (req, res, next) => {
+router.put('/:id/image', passport.authenticate("jwt", {session: false}), upload.single('img'), asyncMiddleware(async (req, res, next) => {
     const blog = await fetch.blog.getBlogById(req.params.id)
     const result = await fetch.image.moveuploadedfile(req.file, '/images/blog', blog)
     res.status(200).send(result)
