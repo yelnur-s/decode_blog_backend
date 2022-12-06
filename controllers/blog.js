@@ -1,6 +1,6 @@
 
 const multer = require('multer')
-const Blog = require('../models/Blog')
+const Blog = require('../models/blog')
 
 const methods = {
     getAllBlogs: async () => {
@@ -52,7 +52,7 @@ const methods = {
         }
     },
 
-    getBlogById: async (id) => await Blog.findById(id).exec(),
+    getBlogById: async (id) => await Blog.findById(id).populate('user').populate('blogType').exec(),
 
     getBlogsByCategoryId: async (categoryId) => await Blog.find({
         ...categoryId ? { blogType: categoryId } : {},
