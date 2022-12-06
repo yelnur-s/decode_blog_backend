@@ -9,7 +9,7 @@ require('./config/db').database()
 require('./config/passport')(passport)
 
 const app = express()
-app.set('port', process.env.PORT || 3001)
+app.set('port', process.env.PORT || 3005)
 
 app.use(express.static(path.join(__dirname, './public'), { maxAge: 1 }))
 app.use(bodyParser.json({ limit: '50mb' }))
