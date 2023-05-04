@@ -26,7 +26,8 @@ router.post('/signup', (req, res) => {
       const newUser = new User({
         name: req.body.name,
         login: req.body.login,
-        password: req.body.password
+        password: req.body.password,
+        img: req.body.img,
       });
 
       newUser
@@ -86,5 +87,16 @@ router.post('/login', (req, res) => {
     });
   });
 });
+
+
+router.put('/editUserInfo', async (req, res) => {
+    const user = User.findById(req.user._id)
+    if(req.body.name) user.name = req.body.name
+    if(req.body.login) user.login = req.body.login
+    if(req.body.img) user.img = req.body.img
+    await user.save()
+    res.status(200).send(user)
+});
+
 
 module.exports = router
